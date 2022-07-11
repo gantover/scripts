@@ -1,0 +1,6 @@
+#!/bin/sh
+
+path=`pwd`
+echo $path
+
+$HOME/documents/scripts/big/format_tex/format_tex.py $path/$1.tex

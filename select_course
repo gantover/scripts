@@ -1,0 +1,2 @@
+#!/bin/sh
+cd $HOME/documents/courses/`ls $HOME/documents/courses | dmenu`
