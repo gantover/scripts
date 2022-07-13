@@ -1,12 +1,15 @@
 #!/usr/bin/python3
 
 import argparse
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="desired file to execute the script on", type=str)
 args = parser.parse_args()
 
-file = open(args.filename,"r")
+filepath = f"{os.getcwd()}/{args.filename}.tex"
+
+file = open(filepath,"r")
 lines = file.readlines()
 
 # keeps a copy in case it goes wrong
@@ -18,7 +21,7 @@ save.close()
 """
 
 # define desired values
-to_treat = {"\chapter":4, "\section":3, "\subsection":2}
+to_treat = {r"\chapter":4, r"\section":3, r"\subsection":2}
 
 diffs = {}
 j = 0
