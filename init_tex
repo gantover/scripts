@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+
+location = os.getcwd()+"/"
+
+parser = argparse.ArgumentParser()
+parser.add_argument("filename", help="desired project name", type=str)
+args = parser.parse_args()
+
+home_dir = os.path.expanduser('~')
+
+choices = []
+templates_path = f"{home_dir}/documents/templates/latex/"
+for elem in os.listdir(templates_path):
+    if elem.split(".")[-1] == "cls":
+        choices.append(elem)
+
+choices = r"$'\n'".join(choices)
+
+choice = os.popen(f"echo {choices} | dmenu").readline().strip("\n")
+
+filepath = f"{location}{args.filename}.tex"
+
+file = open(filepath,"w")
+file.writelines("\\" + "documentclass{" + choice.split('.')[0] + "}") 
+file.close()
+
+os.system(f"cp -s {templates_path}{choice} {location}/")
